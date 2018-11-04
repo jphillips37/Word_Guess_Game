@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Word Guess Game</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <!-- <script type="text/javascript" src="assets/js/game.js"></script> -->
+    </head>
+
+    <body>
+        <h1>Word Guess Game</h1><br>
+
+        <h1 id="wordGuess">_</h1><br>
+
+        <h3>Stats</h3>
+
+        <h5 id="wins">Wins: </h5>
+        <h5 id="losses">Losses: </h5>
+        <h5 id="remGuesses">Guesses Remaining: </h5>
+        <h5>Letters Guessed: </h5>
+        <h5 id="lettersGuessed"></h5>
+
+        <!-- <script type="text/javascript" src="assets/js/game.js">
+            updateAll();
+        </script> -->
+
+        <script>
+            var game = {
+                wins: 0,
+                losses: 0,
+                userGuess: "",
+                remGuesses: 0,
+                guessWord: "",
+                wordsArray: [
+                    "BROWNS",
+                    "DOLPHINS",
+                    "COWBOYS",
+                    "TEXANS",
+                    "CHARGERS",
+                    "PACKERS",
+                    "BEARS",
+                    "BILLS",
+                    "BRONCOS",
+                    "GIANTS"
+                ],
+                lettersGuessed: [""]
+            }
+
+            game.guessWord = game.wordsArray[Math.floor(Math.random() * game.wordsArray.length)];
+
+            console.log(game.guessWord);
+
+            var lossesID = document.getElementById("losses");
+            var winsID = document.getElementById("wins");
+            var remGuessesID = document.getElementById("remGuesses");
+            var lettersGuessedID = document.getElementById("lettersGuessed");
+            var wordGuessID = document.getElementById("wordGuess");
+            var word = game.guessWord.replace(/\w/g, "_"); // use a RegEx to replace all letters with "_"
+            
+            console.log(word);
+
+            winsID.textContent = "Wins: " + game.wins;
+            lossesID.textContent = "Losses: " + game.losses;
+            remGuessesID.textContent = "Remaining Guesses: " + game.remGuesses;
+            lettersGuessedID.textContent = game.lettersGuessed;
+            wordGuessID.textContent = word;
+        </script>
+    </body>
+</html>
