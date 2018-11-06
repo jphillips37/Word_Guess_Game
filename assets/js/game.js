@@ -39,3 +39,19 @@ function updateAll() {
     lettersGuessedID.textContent = game.lettersGuessed;
     wordGuessID.textContent = word;
 }
+
+updateAll();
+
+document.onkeyup = function(event) {
+    var userLetter = event.key; // save user input
+    userLetter = userLetter.toUpperCase(); // make input upper case
+    game.lettersGuessed.push(userLetter); // add user input to array
+
+    updateAll();
+
+    // lettersGuessedID.textContent = event.key;
+    // console.log(lettersGuessedID.textContent);
+
+    
+};
+ 
