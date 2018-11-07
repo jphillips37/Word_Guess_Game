@@ -42,8 +42,9 @@ function updateAll() {
 
 updateAll();
 
+var userLetter;
 document.onkeyup = function(event) {
-    var userLetter = event.key; // save user input
+    userLetter = event.key; // save user input
     userLetter = userLetter.toUpperCase(); // make input upper case
     game.lettersGuessed.push(userLetter); // add user input to array
 
