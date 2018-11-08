@@ -96,7 +96,5 @@ document.onkeyup = function(event) {
             
         }
     }
-
-    // 
 };
  
