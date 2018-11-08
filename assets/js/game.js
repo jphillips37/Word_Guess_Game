@@ -19,9 +19,13 @@ var game = {
     lettersGuessed: [""]
 }
 
+function randomWord() {  // create a function to select a word to guess and reset remaining guesses counter
 game.guessWord = game.wordsArray[Math.floor(Math.random() * game.wordsArray.length)];
 game.remGuesses = Math.floor(game.guessWord.length * 1.5);  // number of guesses is dependant of string length
 console.log(game.remGuesses);
+}
+
+randomWord();
 
 var lossesID = document.getElementById("losses");
 var winsID = document.getElementById("wins");
@@ -42,7 +46,7 @@ function updateAll() {
 
 updateAll();
 
-var stringIndexArray = [];
+// var stringIndexArray = [];
 var userLetter = "";
 var wordArray = game.guessWord.split(""); // array of letters from the word being guessed
 var guessWordArray = word.split(""); // array of word as it appears to the user
@@ -51,8 +55,8 @@ document.onkeyup = function(event) {
     userLetter = event.key; // save user input
     userLetter = userLetter.toUpperCase(); // make input upper case
     
-    // make sure userLetter is a letter
-    if (userLetter.match(/^[A-Za-z]+$/)) {
+    // make sure userLetter is a letter, check number of guesses remaining, user guessed has not already been guessed, and check that guess word is not complete
+    if (userLetter.match(/^[A-Za-z]+$/) && game.remGuesses > 0 && game.lettersGuessed.indexOf(userLetter) == -1 && word.includes("_") == true) { 
         
         console.log(userLetter);
         console.log(game.guessWord.length);
@@ -61,7 +65,7 @@ document.onkeyup = function(event) {
             for (i = 0; i < wordArray.length; i++) {
                 
                 if (wordArray[i] === userLetter) {
-                    guessWordArray[i] = userLetter;  // it seems easier to change elements in an array than characters in a string
+                    guessWordArray[i] = userLetter;  // it seems easier to change elements in an array rather than characters in a string
                     console.log(guessWordArray);
                     word = guessWordArray.join("");  // concatenate all values of the array to put everything back into a single string
                 }
@@ -73,6 +77,11 @@ document.onkeyup = function(event) {
         else {
             game.lettersGuessed.push(userLetter); // if userLetter is not in word, then add it to game.lettersGuessed and decrement game.remguesses
             game.remGuesses--; // decrement remaining guesses if incorrect guess
+                if (game.remGuesses == 0) {
+                    word = game.guessWord
+                    alert("You Lose");
+                    game.losses++;
+                }
         }   
         updateAll();
         console.log(game.remGuesses);
@@ -80,7 +89,12 @@ document.onkeyup = function(event) {
         
     }
     else {
-        // not a letter, ignore input
+        if(userLetter.match(/^[A-Za-z]+$/)) {
+            // not a letter, ignore input
+        }
+        else if (game.remGuesses == 0) {
+            
+        }
     }
 
     // 
